@@ -1,0 +1,22 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: white;
+    background-image: linear-gradient(to bottom right, #2c3e50, #1a252f);
+}
+
+canvas {
+    display: block;
+    border: 1px solid #444;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
