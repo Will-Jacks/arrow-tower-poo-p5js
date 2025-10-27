@@ -1,25 +1,26 @@
-let arrowTowerImg;
+let arrowTowerImg, menuBg;
 let enemies = [];
 let towers = [];
 let projectiles = [];
 let manager;
 let arrowTower;
 
-let screens = 'gameOver';
+let screens = 'menu';
 
 // Defina o caminho aqui
 let path = [
-  { x: -50, y: 300 },   // Ponto inicial fora da tela
+  { x: -30, y: 300 },
   { x: 200, y: 300 },
   { x: 200, y: 150 },
   { x: 300, y: 150 },
   { x: 300, y: 300 },
   { x: 500, y: 300 },
-  { x: 650, y: 400 }  // Ponto final fora da tela à direita
+  { x: 500, y: 0 }
 ];
 
 function preload() {
   arrowTowerImg = loadImage("./public/arrowTower.png");
+  menuBg = loadImage("./public/menu-bg.jpg");
 }
 
 function setup() {
@@ -28,7 +29,6 @@ function setup() {
 }
 
 function draw() {
-  background(50, 100, 150);
   if (manager.isGameOver()) {
     screens = 'gameOver';
   }
@@ -68,7 +68,7 @@ setInterval(() => {
   if (!manager.isGameOver()) { // Só adiciona se o jogo não acabou
     enemies.push(new Enemy(path[0].x, path[0].y, 100, 2, 10, path));
   }
-}, 100); // A cada 3 segundos
+}, 3000); // A cada 3 segundos
 
 function startGame() {
   enemies = [];

@@ -1,24 +1,11 @@
 function drawMenu() {
-    let btnX = width / 2;
-    let btnY = height / 2 + 50;
-    let btnWidth = 200;
-    let btnHeight = 80;
-    let btnRadius = 20;
+    let btnX = 300;
+    let btnY = 550;
+    let btnHalfW = 90;
+    let btnHalfH = 25
+    let isOverBtn1 = mouseX >= btnX - btnHalfW && mouseX <= btnX + btnHalfW && mouseY >= btnY - btnHalfH && mouseY <= btnY + btnHalfH;
 
-    background(100, 150, 200); // Azul
-    fill(255);
-    textSize(48);
-    textAlign(CENTER, CENTER);
-    text("Meu tower defense", width / 2, height / 3);
-
-    textSize(32);
-    fill(0, 200, 0); // Verde
-    rectMode(CENTER);
-    rect(btnX, btnY, btnWidth, btnHeight, btnRadius);
-    fill(255);
-    text("Iniciar jogo", btnX, btnY);
-    rectMode(CORNER);
-    if (mouseX >= btnX - 100 && mouseX <= btnX + 100 && mouseY >= btnY - 40 && mouseY <= btnY + 40) {
+    if (isOverBtn1) {
         cursor("pointer");
         if (mouseIsPressed) {
             screens = 'game';
@@ -27,19 +14,27 @@ function drawMenu() {
     } else {
         cursor("default")
     }
+
+    image(menuBg, 0, 0, 600, 600);
 }
 
 function drawGameOver() {
     let btnX = width / 2;
-    let btnY = height / 2 + 100;
+    let btnY = height / 3 + 100;
     let btnWidth = 250;
     let btnHeight = 80;
     let btnRadius = 20;
+    // Hitbox do Botão 1 (Tentar Novamente)
+    let isOverBtn1 = mouseX >= btnX - 125 && mouseX <= btnX + 125 &&
+        mouseY >= btnY - 40 && mouseY <= btnY + 40;
+    // Hitbox do Botão 2 (Menu Inicial)
+    let isOverBtn2 = mouseX >= btnX - 125 && mouseX <= btnX + 125 &&
+        mouseY >= btnY + 60 && mouseY <= btnY + 140;
 
     fill(255, 0, 0);
     textSize(50);
     textAlign(CENTER, CENTER);
-    text("GAME OVER", width / 2, height / 2);
+    text("GAME OVER", width / 2, height / 3);
 
     // Botão de "Tentar Novamente"
     textSize(24);
@@ -48,29 +43,31 @@ function drawGameOver() {
     rect(btnX, btnY, btnWidth, btnHeight, btnRadius);
     fill(0);
     text("Tentar Novamente", btnX, btnY);
-    if (mouseX >= btnX - 125 && mouseX <= btnX + 125 && mouseY >= btnY - 40 && mouseY <= btnY + 40) {
-        cursor("pointer");
-        if (mouseIsPressed) {
-            screens = 'game';
-            startGame();
-        }
-    }
+    //Botão menu inicial
     fill(200);
     rect(btnX, btnY + 100, btnWidth, btnHeight, btnRadius);
     fill(0);
     text("Menu inicial", btnX, btnY + 100);
     rectMode(CORNER);
-    if (mouseX >= btnX - 125 && mouseX <= btnX + 125 && mouseY >= btnY + 60 && mouseY <= btnY + 140) {
+    if (isOverBtn1) {
+        cursor("pointer");
+        if (mouseIsPressed) {
+            screens = 'game';
+            startGame();
+        }
+    } else if (isOverBtn2) {
         cursor("pointer");
         if (mouseIsPressed) {
             screens = 'menu';
         }
     } else {
-        cursor("default")
+        cursor("default");
     }
+
 }
 
 function drawGame() {
+    background(100, 150, 200);
     // Desenha o caminho (opcional, para depuração)
     stroke(200, 200, 0, 100);
     strokeWeight(15);
