@@ -68,16 +68,18 @@ function drawGameOver() {
 
 function drawGame() {
     background(100, 150, 200);
-    // Desenha o caminho (opcional, para depuração)
+    // Desenha o caminho
     stroke(200, 200, 0, 100);
-    strokeWeight(15);
+    strokeWeight(40);
     noFill();
+    strokeJoin(ROUND);
     beginShape();
     for (let p of path) {
         vertex(p.x, p.y);
     }
     endShape();
     strokeWeight(1); // Restaura o peso da linha
+    strokeJoin(MITER);//Restaura o padrão do stroke
 
     // Atualiza e desenha torres
     for (let tower of towers) {

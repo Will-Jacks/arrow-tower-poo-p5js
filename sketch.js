@@ -29,15 +29,14 @@ function setup() {
 }
 
 function draw() {
-  if (manager.isGameOver()) {
-    screens = 'gameOver';
-  }
-
   switch (screens) {
     case 'menu':
       drawMenu();
       break;
     case 'game':
+      if (manager.isGameOver()) {
+        screens = 'gameOver';
+      }
       drawGame();
       break;
     case 'gameOver':

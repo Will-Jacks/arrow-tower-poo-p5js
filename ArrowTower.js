@@ -1,8 +1,9 @@
 class ArrowTower extends Tower {
     static COST = 100;
     static RANGE = 150;
+    static IMAGE = image(arrowTowerImg, _, _, 50, 50);
     constructor(x, y) {
-        super(x, y, arrowTowerImg, ArrowTower.COST, 20, ArrowTower.RANGE);
+        super(x, y, ArrowTower.IMAGE, ArrowTower.COST, 20, ArrowTower.RANGE);
         this.shotSpeed = 10;
         this.cooldownBase = 60;
         this.cooldown = 0;
