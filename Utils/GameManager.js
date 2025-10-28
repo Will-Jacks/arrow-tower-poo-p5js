@@ -97,6 +97,6 @@ class GameManager {
     }
 
     static formatMoney(value) {
-        return `R$ ${value.toFixed(2)}`;
+        return `🪙 ${value.toFixed(2)}`;
     }
 }

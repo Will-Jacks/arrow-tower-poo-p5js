@@ -122,5 +122,5 @@ function drawGame() {
     textAlign(LEFT, TOP); // Garante o alinhamento padrão
     text(GameManager.formatMoney(manager.playerMoney), 10, 10);
     // Exibe vidas - ajuste a posição Y se necessário
-    text(`Vidas: ${manager.playerLives}`, 10, 35);
+    text(`❤️: ${manager.playerLives}`, 10, 35);
 }
