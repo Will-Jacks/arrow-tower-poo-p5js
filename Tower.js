@@ -1,19 +1,20 @@
 class Tower {
     #range;
     #cost;
-    constructor(x, y, img, cost, damage, range, level = 1) {
+    constructor(x, y, img, cost, damage, range, w, h) {
         this.x = x;
         this.y = y;
         this.img = img;
         this.#cost = cost;
         this.damage = damage;
         this.#range = range;
-        this.level = level;
         this.cooldown = 0;
+        this.width = w;
+        this.height = h;
 
         //Para cálculos de distância
-        this.centerX = x + img.width / 2;
-        this.centerY = y + img.height / 2;
+        this.centerX = x + this.width / 2;
+        this.centerY = y + this.height / 2;
     }
 
     get cost() {
@@ -60,9 +61,10 @@ class Tower {
         }
     }
     draw() {
-        image(this.img, this.x, this.y);
+        image(this.img, this.x, this.y, this.width, this.height);
         noFill();
         stroke(0, 255, 0, 100);
+        strokeWeight(2);
         ellipse(this.centerX, this.centerY, this.#range * 2);
     }
 }

@@ -11,12 +11,14 @@ let screens = 'menu';
 let path = [
   { x: -30, y: 300 },
   { x: 200, y: 300 },
-  { x: 200, y: 150 },
-  { x: 300, y: 150 },
+  { x: 200, y: 450 },
+  { x: 300, y: 450 },
   { x: 300, y: 300 },
   { x: 500, y: 300 },
   { x: 500, y: 0 }
 ];
+
+const pathStrokeWeight = 25;
 
 function preload() {
   arrowTowerImg = loadImage("./public/arrowTower.png");
@@ -48,11 +50,11 @@ function draw() {
 
 function mousePressed() {
   if (screens === 'game') {
-    let canConstruct = GameManager.validateConstructionPos(mouseX, mouseY, towers);
+    let canConstruct = GameManager.validateConstructionPos(mouseX, mouseY, towers, path, pathStrokeWeight);
 
     if (canConstruct && manager.canBuy(ArrowTower.COST)) {
       if (manager.spendMoney(ArrowTower.COST)) {
-        towers.push(new ArrowTower(mouseX - arrowTowerImg.width / 2, mouseY - arrowTowerImg.height / 2));
+        towers.push(new ArrowTower(mouseX - ArrowTower.W / 2, mouseY - ArrowTower.H / 2));
       }
     } else if (!canConstruct) {
       console.log("Não pode construir aqui, muito perto de outra torre."); // Melhor usar console.log que alert

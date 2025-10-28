@@ -9,6 +9,7 @@ function drawMenu() {
         cursor("pointer");
         if (mouseIsPressed) {
             screens = 'game';
+            cursor("default");
             startGame();
         }
     } else {
@@ -70,7 +71,7 @@ function drawGame() {
     background(100, 150, 200);
     // Desenha o caminho
     stroke(200, 200, 0, 100);
-    strokeWeight(40);
+    strokeWeight(pathStrokeWeight);
     noFill();
     strokeJoin(ROUND);
     beginShape();
