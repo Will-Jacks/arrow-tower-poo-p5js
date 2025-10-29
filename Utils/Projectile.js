@@ -12,27 +12,31 @@ class Projectile {
 
     update() {
         // Se o alvo ainda existe (não foi removido/morto)
-        if (this.target && this.target.getLife() > 0) {
-            // Calcula o ângulo em direção ao alvo *a cada quadro* (projétil teleguiado)
-            let angle = Math.atan2(this.target.y - this.y, this.target.x - this.x);
-            this.x += this.speed * Math.cos(angle);
-            this.y += this.speed * Math.sin(angle);
+        if (this.target && this.target.getLife() > 0) { //
 
-            // Verifica colisão
-            let d = GameManager.calculateDistance(this.x, this.y, this.target.x, this.target.y);
-            // Considera o tamanho do inimigo e do projétil para colisão
-            if (d < this.target.width / 2 + this.size / 2) {
-                this.target.receiveDamage(this.damage); // Causa dano
-                this.hit = true; // Marca como atingido
-                // Aplicar efeito se houver (ex: lentidão)
-                if (this.effect) {
-                    // Lógica para aplicar o efeito (ex: this.target.applyEffect(this.effect))
-                }
+            // 1. Calcular a distância
+            let d = GameManager.calculateDistance(this.x, this.y, this.target.x, this.target.y); //
+
+            // 2. Verificar se vai atingir
+            if (d < this.speed || d < this.target.width / 2 + this.size / 2) {
+                // Se sim, acerte o alvo e pare
+                this.target.receiveDamage(this.damage); //
+                this.hit = true; //
+
+                /* if (this.effect) { //
+                    // Lógica para aplicar o efeito
+                } */
+
+            } else {
+                // 3. Se não, continue se movendo normalmente
+                let angle = Math.atan2(this.target.y - this.y, this.target.x - this.x); //
+                this.x += this.speed * Math.cos(angle); //
+                this.y += this.speed * Math.sin(angle); //
             }
+
         } else {
-            // Se o alvo não existe mais, marca para remoção (ou continua reto)
-            // Para simplificar, vamos marcar para remoção imediata se o alvo sumir
-            this.hit = true; // Ou poderia continuar o movimento reto
+            // Se o alvo não existe mais, marca para remoção
+            this.hit = true; //
         }
     }
 

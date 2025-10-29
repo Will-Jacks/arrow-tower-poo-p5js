@@ -4,25 +4,27 @@ class CannonTower extends Tower {
     static W = 100;
     static H = 100;
     static DAMAGE = 30;
+    static EXPLOSION_RADIUS = 50;
 
     constructor(x, y) {
         super(x, y, cannonTowerImg, CannonTower.COST, CannonTower.DAMAGE, CannonTower.RANGE, CannonTower.W, CannonTower.H);
         this.shotSpeed = 5;
-        this.cooldownBase = 60;
+        this.cooldownBase = 120;
         this.cooldown = 0;
     }
 
 
     attack(enemy) {
         if (this.cooldown <= 0 && enemy) {
-            let arrow = new Projectile(
+            let cannonBall = new CannonBall(
                 this.centerX,
                 this.centerY,
                 enemy,
                 this.damage,
-                this.shotSpeed
+                this.shotSpeed,
+                CannonTower.EXPLOSION_RADIUS
             );
-            projectiles.push(arrow);
+            projectiles.push(cannonBall);
             this.cooldown = this.cooldownBase;
         }
 

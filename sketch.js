@@ -71,14 +71,14 @@ function mousePressed() {
 
     if (currentSelectedTower) {
       let canConstruct = GameManager.validateConstructionPos(mouseX, mouseY, towers, path, pathStrokeWeight);
-      if (canConstruct && manager.canBuy(ArrowTower.COST)) {
-        if (manager.spendMoney(ArrowTower.COST)) {
+      if (canConstruct && manager.canBuy(towerCost)) {
+        if (manager.spendMoney(towerCost)) {
           towers.push(new currentSelectedTower(mouseX - ArrowTower.W / 2, mouseY - ArrowTower.H / 2));
         }
       } else if (!canConstruct) {
-        alert("Não pode construir aqui, muito perto de outro objeto.");
+        console.log("Não pode construir aqui, muito perto de outro objeto.");
       } else {
-        alert("Dinheiro insuficiente.");
+        console.log("Dinheiro insuficiente.");
       }
     }
   }
@@ -87,7 +87,7 @@ function mousePressed() {
 // Adiciona inimigos periodicamente
 setInterval(() => {
   if (!manager.isGameOver()) { // Só adiciona se o jogo não acabou
-    enemies.push(new Enemy(path[0].x, path[0].y, 100, 2, 10, path));
+    enemies.push(new Enemy(path[0].x, path[0].y, 100, 1, 10, path));
   }
 }, 3000); // A cada 3 segundos
 
@@ -102,5 +102,5 @@ function startGame() {
   //towers.push(arrowTower);
   //towers.push(cannonTower);
   // Criando inimigo e o caminho a percorrer
-  enemies.push(new Enemy(path[0].x, path[0].y, 100, 2, 10, path));
+  //enemies.push(new Enemy(path[0].x, path[0].y, 100, 2, 10, path));
 }
