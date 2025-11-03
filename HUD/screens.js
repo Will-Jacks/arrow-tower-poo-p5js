@@ -68,7 +68,8 @@ function drawGameOver() {
 }
 
 function drawGame() {
-    background(100, 150, 200);
+    image(gameBg, 0, 0, 600, 600);
+    //background(100, 150, 200);
     // Desenha o caminho
     stroke(200, 200, 0, 100);
     strokeWeight(pathStrokeWeight);

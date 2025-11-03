@@ -12,31 +12,20 @@ class Projectile {
 
     update() {
         // Se o alvo ainda existe (não foi removido/morto)
-        if (this.target && this.target.getLife() > 0) { //
-
-            // 1. Calcular a distância
-            let d = GameManager.calculateDistance(this.x, this.y, this.target.x, this.target.y); //
-
-            // 2. Verificar se vai atingir
+        if (this.target && this.target.getLife() > 0) {
+            //Calcular a distância
+            let d = GameManager.calculateDistance(this.x, this.y, this.target.x, this.target.y);
+            //Verificar se vai atingir
             if (d < this.speed || d < this.target.width / 2 + this.size / 2) {
-                // Se sim, acerte o alvo e pare
-                this.target.receiveDamage(this.damage); //
-                this.hit = true; //
-
-                /* if (this.effect) { //
-                    // Lógica para aplicar o efeito
-                } */
-
+                this.target.receiveDamage(this.damage);
+                this.hit = true; //Pegou
             } else {
-                // 3. Se não, continue se movendo normalmente
-                let angle = Math.atan2(this.target.y - this.y, this.target.x - this.x); //
-                this.x += this.speed * Math.cos(angle); //
-                this.y += this.speed * Math.sin(angle); //
+                let angle = Math.atan2(this.target.y - this.y, this.target.x - this.x);
+                this.x += this.speed * Math.cos(angle);
+                this.y += this.speed * Math.sin(angle); //Continua se movendo normalmente se não pegou no inimigo
             }
-
         } else {
-            // Se o alvo não existe mais, marca para remoção
-            this.hit = true; //
+            this.hit = true; // Se o alvo não existe mais, marca para remoção
         }
     }
 

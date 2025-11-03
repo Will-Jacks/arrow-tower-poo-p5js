@@ -52,34 +52,24 @@ class GameManager {
     }
 
     static validateConstructionPos(x, y, allTowers, pathPoints, pathWidth) {
-        // 1. Verificar se não está em cima de outra torre
         for (let tower of allTowers) {
             let d = this.calculateDistance(x, y, tower.centerX, tower.centerY);
-            if (d < 50) { // Ou o raio da torre, se preferir
-                return false; // Não pode construir aqui, muito perto de outra torre
+            if (d < 50) {
+                return false;
             }
         }
-        // 2. Verificar se não está em cima do caminho
-        // x, y é o centro da nova torre.
-        // O pathWidth é a largura total do caminho (strokeWeight).
-        // Precisamos de uma margem que inclua a metade da largura da torre + a metade da largura do caminho.
-        const SAFE_DISTANCE_FROM_PATH = (pathWidth / 2 + ArrowTower.W / 2) - 20; // Exemplo: 25/2 + 50/2 = 12.5 + 25 = 37.5
-
+        const SAFE_DISTANCE_FROM_PATH = (pathWidth / 2 + ArrowTower.W / 2) - 20;
         for (let i = 0; i < pathPoints.length - 1; i++) {
             let p1 = pathPoints[i];
             let p2 = pathPoints[i + 1];
-
-            //Precisei criar a função dist do p5 na mão, já que não funciona pra métodos estáticos
             let distToSegment = GameManager.distancePointToSegment(x, y, p1.x, p1.y, p2.x, p2.y);
             if (distToSegment < SAFE_DISTANCE_FROM_PATH) {
-                return false; // Não pode construir em cima do caminho
+                return false;
             }
         }
-        return true; // Posição válida
+        return true;
     }
 
-    // Função auxiliar para calcular a distância de um ponto (px, py) a um segmento (x1, y1) - (x2, y2)
-    // Isso é mais preciso do que apenas verificar a distância para os pontos de referência
     static distancePointToSegment(px, py, x1, y1, x2, y2) {
         let dx = x2 - x1;
         let dy = y2 - y1;
@@ -87,7 +77,7 @@ class GameManager {
         let t = 0;
         if (lengthSq !== 0) {
             t = ((px - x1) * dx + (py - y1) * dy) / lengthSq;
-            t = constrain(t, 0, 1); // Garante que 't' esteja entre 0 e 1 (dentro do segmento)
+            t = constrain(t, 0, 1);
         }
 
         let nearestX = x1 + t * dx;

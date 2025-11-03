@@ -1,4 +1,4 @@
-let arrowTowerImg, cannonTowerImg, arrowTowerCard, cannonTowerCard, menuBg;
+let arrowTowerImg, cannonTowerImg, arrowTowerCard, cannonTowerCard, goblinImg, menuBg, gameBg;
 let enemies = [];
 let towers = [];
 let projectiles = [];
@@ -30,6 +30,8 @@ function preload() {
   arrowTowerCard = loadImage("./public/arrowTowerCard.png");
   cannonTowerCard = loadImage("./public/cannonTowerCard.png");
   menuBg = loadImage("./public/menu-bg.jpg");
+  gameBg = loadImage("./public/game-bg.png");
+  goblinImg = loadImage("./public/goblin.png");
 }
 
 function setup() {
@@ -50,8 +52,6 @@ function draw() {
       drawGame();
       drawTowerCards();
       checkTowerCardHover();
-      fill(255, 0, 0);
-      text(mouseX + "," + mouseY, mouseX, mouseY);
       break;
     case 'gameOver':
       drawGameOver();

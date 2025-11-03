@@ -4,8 +4,9 @@ class Enemy {
     constructor(x, y, life, speed = 1, reward = 10, path) {
         this.x = x;
         this.y = y;
-        this.width = 20;
-        this.height = 20;
+        this.img = goblinImg;
+        this.width = 40;
+        this.height = 40;
         this.#life = life;
         this.baseSpeed = speed;
         this.currentSpeed = speed;
@@ -58,16 +59,19 @@ class Enemy {
     }
 
     draw() {
-        fill(255, 0, 0);
+        push();
+        imageMode(CENTER);
+        image(this.img, this.x, this.y - this.height / 2, this.width, this.height);
+        pop();
+        //Barra de comparação da vida
         noStroke();
-        ellipse(this.x, this.y, this.width, this.height);
-
         fill(50);
-        rect(this.x - this.width / 2, this.y - this.height, this.width, 5);
-        fill(0, 255, 0);
+        rect(this.x - this.width / 2, this.y - this.height, this.width, 5, 10);
         //Para a vida não ficar negativa
         const currentLife = Math.max(0, this.#life);
         const lifePercentage = currentLife / 100;
-        rect(this.x - this.width / 2, this.y - this.height, this.width * lifePercentage, 5);
+        //Barra de vida verde
+        fill(0, 255, 0);
+        rect(this.x - this.width / 2, this.y - this.height, this.width * lifePercentage, 5, 10);
     }
 }
