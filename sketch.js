@@ -1,4 +1,4 @@
-let arrowTowerImg, cannonTowerImg, arrowTowerCard, cannonTowerCard, goblinImg, menuBg, gameBg;
+let arrowTowerImg, cannonTowerImg, arrowTowerCard, cannonTowerCard, goblinImg, scoutImg, bruteImg, tankImg, bossImg, menuBg, gameBg;
 let enemies = [];
 let towers = [];
 let projectiles = [];
@@ -32,6 +32,10 @@ function preload() {
   menuBg = loadImage("./public/menu-bg.jpg");
   gameBg = loadImage("./public/game-bg.png");
   goblinImg = loadImage("./public/goblin.png");
+  tankImg = loadImage("./public/tank.png");
+  scoutImg = loadImage("./public/scout.png");
+  bruteImg = loadImage("./public/brute.png");
+  bossImg = loadImage("./public/boss.png");
 }
 
 function setup() {
@@ -87,9 +91,9 @@ function mousePressed() {
 // Adiciona inimigos periodicamente
 setInterval(() => {
   if (!manager.isGameOver()) { // Só adiciona se o jogo não acabou
-    enemies.push(new Enemy(path[0].x, path[0].y, 100, 1, 10, path));
+    enemies.push(new Scout(path[0].x, path[0].y));
   }
-}, 3000); // A cada 3 segundos
+}, 1000); // A cada 3 segundos
 
 function startGame() {
   enemies = [];

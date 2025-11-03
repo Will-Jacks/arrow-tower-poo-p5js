@@ -1,10 +1,10 @@
 class Enemy {
     #life;
 
-    constructor(x, y, life, speed = 1, reward = 10, path) {
+    constructor(x, y, img, life, speed = 1, reward = 10, path) {
         this.x = x;
         this.y = y;
-        this.img = goblinImg;
+        this.img = img;
         this.width = 40;
         this.height = 40;
         this.#life = life;
