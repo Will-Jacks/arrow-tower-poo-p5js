@@ -1,7 +1,7 @@
 class ArrowTower extends Tower {
-    static COST = 100;
+    static COST = 75;
     static RANGE = 150;
-    static DAMAGE = 100;
+    static DAMAGE = 40;
     static W = 100;
     static H = 100;
 

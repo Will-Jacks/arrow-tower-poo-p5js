@@ -1,5 +1,5 @@
 class CannonTower extends Tower {
-    static COST = 50;
+    static COST = 125;
     static RANGE = 100;
     static W = 100;
     static H = 100;

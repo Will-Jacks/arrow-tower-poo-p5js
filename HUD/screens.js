@@ -69,7 +69,34 @@ function drawGameOver() {
 
 function drawGame() {
     image(gameBg, 0, 0, 600, 600);
-    //background(100, 150, 200);
+
+    // (frameRate() pode ser 0 no início, então garanta que não seja)
+    const deltaTime = (1 / (frameRate() || 60));
+
+    // Se a onda acabou (sem inimigos na tela E sem inimigos para criar)
+    if (enemies.length === 0 && enemiesToSpawn.length === 0) {
+        timeToNextWave -= deltaTime;
+
+        // (Opcional) Mostra o timer na tela
+        fill(255);
+        textSize(20);
+        textAlign(CENTER, CENTER);
+        text("Próxima onda em ".concat(Math.ceil(timeToNextWave)), width / 2, height / 2);
+
+        if (timeToNextWave <= 0) {
+            startNextWave();
+        }
+    }
+    // Se a onda está em progresso, crie inimigos
+    else if (enemiesToSpawn.length > 0) {
+        spawnTimer -= deltaTime;
+        if (spawnTimer <= 0) {
+            spawnEnemy();
+        }
+    }
+    //--------------------------------------//
+
+
     // Desenha o caminho
     stroke(200, 200, 0, 100);
     strokeWeight(pathStrokeWeight);
@@ -120,8 +147,7 @@ function drawGame() {
     // Exibe dinheiro e vidas
     fill(255);
     textSize(20);
-    textAlign(LEFT, TOP); // Garante o alinhamento padrão
+    textAlign(LEFT, TOP);
     text(GameManager.formatMoney(manager.playerMoney), 10, 10);
-    // Exibe vidas - ajuste a posição Y se necessário
     text(`❤️: ${manager.playerLives}`, 10, 35);
 }
