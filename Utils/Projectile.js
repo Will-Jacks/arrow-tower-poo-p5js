@@ -11,21 +11,21 @@ class Projectile {
     }
 
     update() {
-        // Se o alvo ainda existe (não foi removido/morto)
+        // Se o alvo ainda existe
         if (this.target && this.target.getLife() > 0) {
             //Calcular a distância
             let d = GameManager.calculateDistance(this.x, this.y, this.target.x, this.target.y);
             //Verificar se vai atingir
             if (d < this.speed || d < this.target.width / 2 + this.size / 2) {
                 this.target.receiveDamage(this.damage);
-                this.hit = true; //Pegou
+                this.hit = true;
             } else {
                 let angle = Math.atan2(this.target.y - this.y, this.target.x - this.x);
                 this.x += this.speed * Math.cos(angle);
-                this.y += this.speed * Math.sin(angle); //Continua se movendo normalmente se não pegou no inimigo
+                this.y += this.speed * Math.sin(angle);
             }
         } else {
-            this.hit = true; // Se o alvo não existe mais, marca para remoção
+            this.hit = true;
         }
     }
 

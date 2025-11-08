@@ -12,7 +12,6 @@ class Tower {
         this.width = w;
         this.height = h;
 
-        //Para cálculos de distância
         this.centerX = x + this.width / 2;
         this.centerY = y + this.height / 2;
     }
